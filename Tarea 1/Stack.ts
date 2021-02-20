@@ -39,8 +39,8 @@ export class Stack<T> {
   }
 
   /**
-   * Removes the next element in the queue, effectively reducing its size by one.
-   * @returns The removed element from the queue; `null` if the queue is empty.
+   * Removes the next element in the stack, effectively reducing its size by one.
+   * @returns The removed element from the stack; `null` if the stack is empty.
    */
   pop(): T | null {
     let curr = this.topNode;
