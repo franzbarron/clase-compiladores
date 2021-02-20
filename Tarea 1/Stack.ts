@@ -1,5 +1,8 @@
 import { Node } from "./Node.ts";
 
+/**
+ * Implementation of stacks, first-in last-out containers
+ */
 export class Stack<T> {
   private topNode?: Node<T> | null;
   private size: number;
@@ -13,42 +16,47 @@ export class Stack<T> {
   }
 
   /**
-   * Test whether container is empty
+   * Returns whether the stack is empty: i.e. whether its size is zero.
+   * @returns `true` if the stacks's size is `0`, `false` otherwise.
    */
-  isEmpty() {
+  isEmpty(): boolean {
     return this.topNode === null;
   }
 
   /**
-   * Return size
+   * The number of elements in the stack.
    */
-  get length() {
+  get length(): number {
     return this.size;
   }
 
   /**
-   * Access next element
+   * Returns the next element in the stack.
+   * @returns The next element in the stack.
    */
-  get top() {
+  get top(): T | null {
     return this.topNode?.value ?? null;
   }
 
   /**
-   * Remove and return top element. If stack is empty, return `null`
+   * Removes the next element in the queue, effectively reducing its size by one.
+   * @returns The removed element from the queue; `null` if the queue is empty.
    */
-  pop() {
+  pop(): T | null {
     let curr = this.topNode;
     this.topNode = curr?.next;
     this.size--;
 
-    return curr?.value ?? null;
+    return curr!.value ?? null;
   }
 
   /**
-   * Insert element
+   * Inserts a new element at the top of the stack, above its current top
+   * element.
    * @param value Value to which the inserted element is initialized.
+   * @returns The new `length` property of the stack.
    */
-  push(value: T) {
+  push(value: T): T {
     this.topNode = new Node(value, this.topNode);
     this.size++;
 

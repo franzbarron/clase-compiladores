@@ -93,7 +93,7 @@ Deno.test("Removal of element from hash table", () => {
   const ht = new HashTable<string, string>();
   ht.set("red", "#FF0000");
   ht.set("maroon", "#800000");
-  assertNotEquals(ht.remove("maroon"), null);
+  assert(ht.remove("maroon"));
 });
 
 Deno.test("Removal of element with non existing key on hash table", () => {
@@ -101,7 +101,7 @@ Deno.test("Removal of element with non existing key on hash table", () => {
   ht.set("yellow", "#FFFF00");
   ht.set("olive", "#808000");
   ht.set("lime", "#00FF00");
-  assertEquals(ht.remove("gray"), null);
+  assertEquals(ht.remove("gray"), false);
 });
 
 Deno.test("Existance of removed element from hash table", () => {

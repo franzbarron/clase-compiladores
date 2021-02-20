@@ -1,5 +1,8 @@
 import { Node } from "./Node.ts";
 
+/**
+ * Implementation of queues, first-in first-out containers
+ */
 export class Queue<T> {
   private back: Node<T> | null;
   private size: number;
@@ -13,30 +16,33 @@ export class Queue<T> {
   }
 
   /**
-   * Test whether container is empty
+   * Returns whether the queue is empty: i.e. whether its size is zero.
+   * @returns `true` if the queue's size is `0`, `false` otherwise.
    */
-  isEmpty() {
+  isEmpty(): boolean {
     return this.back === null;
   }
 
   /**
-   * Return size
+   * The number of elements in the queue.
    */
-  get length() {
+  get length(): number {
     return this.size;
   }
 
   /**
-   * Access next element
+   * Returns the next element in the queue.
+   * @returns The next element in the queue.
    */
-  get front() {
-    return this.back?.next?.value ?? null;
+  get front(): T | null {
+    return this.back?.next!.value ?? null;
   }
 
   /**
-   * Remove and return next element. If queue is empty, return `null`.
+   * Removes the next element in the queue, effectively reducing its size by one.
+   * @returns The removed element from the queue; `null` if the queue is empty.
    */
-  pop() {
+  pop(): T | null {
     let curr = this.back?.next;
 
     if (this.back?.next == this.back) this.back = null;
@@ -44,14 +50,15 @@ export class Queue<T> {
 
     this.size--;
 
-    return curr?.value ?? null;
+    return curr!.value ?? null;
   }
 
   /**
-   * Insert element
+   * Inserts a new element at the end of the queue, after its current last element.
    * @param value Value to which the inserted element is initialized.
+   * @returns The new `length` property of the queue.
    */
-  push(value: T) {
+  push(value: T): number {
     if (this.back === null) {
       this.back = new Node(value);
       this.back.next = this.back;
@@ -60,8 +67,6 @@ export class Queue<T> {
       this.back = this.back?.next;
     }
 
-    this.size++;
-
-    return this.back!.value;
+    return ++this.size;
   }
 }
